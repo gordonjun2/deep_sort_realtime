@@ -7,6 +7,7 @@ from . import kalman_filter
 
 
 INFTY_COST = 1e+5
+EPSILON = 1e-5
 
 
 def min_cost_matching(
@@ -56,6 +57,7 @@ def min_cost_matching(
     cost_matrix = distance_metric(
         tracks, detections, track_indices, detection_indices)
     cost_matrix[cost_matrix > max_distance] = max_distance + 1e-5
+    #print(cost_matrix)
     # indices = linear_assignment(cost_matrix)
     indices = np.vstack(linear_sum_assignment(cost_matrix)).T
 

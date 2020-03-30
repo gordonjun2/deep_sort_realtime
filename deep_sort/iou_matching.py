@@ -32,8 +32,10 @@ def iou(bbox, candidates):
     br = np.c_[np.minimum(bbox_br[0], candidates_br[:, 0])[:, np.newaxis],
                np.minimum(bbox_br[1], candidates_br[:, 1])[:, np.newaxis]]
     wh = np.maximum(0., br - tl)
+    #print("WH:", wh)
 
     area_intersection = wh.prod(axis=1)
+    #print("AREA INTER:", area_intersection)
     area_bbox = bbox[2:].prod()
     area_candidates = candidates[:, 2:].prod(axis=1)
     return area_intersection / (area_bbox + area_candidates - area_intersection)
@@ -70,11 +72,13 @@ def iou_cost(tracks, detections, track_indices=None,
         detection_indices = np.arange(len(detections))
 
     cost_matrix = np.zeros((len(track_indices), len(detection_indices)))
+    #print("CM:", cost_matrix)
     for row, track_idx in enumerate(track_indices):
         if tracks[track_idx].time_since_update > 1:
             cost_matrix[row, :] = linear_assignment.INFTY_COST
+            #print("hhhhhhhhhhhiiiiiiiiiiiiiiiiiiiiii")
             continue
-
+        #print("CM:", cost_matrix)
         bbox = tracks[track_idx].to_tlwh()
         candidates = np.asarray([detections[i].tlwh for i in detection_indices])
         cost_matrix[row, :] = 1. - iou(bbox, candidates)

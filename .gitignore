@@ -95,3 +95,7 @@ deep_sort_app.py
 
 resources/
 tools/
+
+# large files
+
+*.pth

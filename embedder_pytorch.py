@@ -4,10 +4,10 @@ import cv2
 import math
 # import time
 import os 
-if __name__ == '__main__':
-    from mobilenetv2.mobilenetv2_bottle import MobileNetV2_bottle
-else:
-    from .mobilenetv2.mobilenetv2_bottle import MobileNetV2_bottle
+# if __name__ == '__main__':
+from mobilenetv2.mobilenetv2_bottle import MobileNetV2_bottle
+# else:
+#     from .mobilenetv2.mobilenetv2_bottle import MobileNetV2_bottle
 DIR = os.path.dirname(os.path.realpath(__file__))
 
 # MOBILENETV2_BOTTLENECK_TORCH_MODEL =os.path.join(DIR,"mobilenetv2/mobilenetv2_bottle_py35.pt")
@@ -33,6 +33,7 @@ def preprocess(np_image_bgr):
     # toc = time.time()
     # print('flip channel time: {}s'.format(toc - tic))
     # tic = time.time()
+    #print("WHAT THE PROB:", np_image_rgb)
     np_image_rgb = cv2.resize(np_image_rgb, (INPUT_WIDTH, INPUT_WIDTH))
     # toc = time.time()
     # print('resize time: {}s'.format(toc - tic))
@@ -99,8 +100,9 @@ class MobileNetv2_Embedder(object):
             input_batch = torch.zeros((min(batch_size, remainder), 3, INPUT_WIDTH, INPUT_WIDTH))
             # For each img in batch
             for k, img in enumerate(split_batches[i]):
-                img = preprocess(img)
-                input_batch[k] = img
+                if img.shape[0] * img.shape[1] * img.shape[2] != 0:
+                    img = preprocess(img)
+                    input_batch[k] = img
             # Batch inference
             # tic = time.time()
             input_batch = input_batch.cuda()
