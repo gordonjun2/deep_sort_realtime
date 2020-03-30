@@ -1,3 +1,19 @@
+# Deep Sort Tracking with CenterNet (or CenterNet (by Xing Yi Zhou))
+
+## Introduction
+
+- Deep Sort is added on top of CenterNet-1
+- Detections by CenterNet-1 will be send to Deep Sort to do the tracking
+
+## How to use
+
+Enter main directory and use:
+
+```
+python demo_deep_sort.py ctdet_drone --dataset visdrone --arch <choose your arch> --load_model <path to .pth> --demo <path to video>
+
+```
+
 # Deep SORT
 
 ## Introduction
