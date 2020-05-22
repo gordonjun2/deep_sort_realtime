@@ -14,6 +14,12 @@ python demo_deep_sort.py ctdet_drone --dataset visdrone --arch <choose your arch
 
 ```
 
+## Download pretrained CenterNet-1 model
+
+Link: https://drive.google.com/file/d/1XMOjUZRbAmWVUNKGsbl6_cou5RnI338B/view?usp=sharing
+
+Place pretrained model to ./deep_sort_realtime/CenterNet-1/exp/ctdet_drone/dla_34/model_5_1.0785181907108123.pth
+
 # Deep SORT
 
 ## Introduction
